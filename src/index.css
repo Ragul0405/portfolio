@@ -1,0 +1,250 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---- Theme variables (light = base, .dark overrides) ---- */
+:root {
+  --bg: #f4f2f4;
+  --bg-2: #ece8ec;
+  --surface: #ffffff;
+  --text: #16131a;
+  --muted: #6b6770;
+  --accent: #d41e3c;
+  --accent-2: #a8152f;
+  --line: rgba(0, 0, 0, 0.09);
+  --line-2: rgba(0, 0, 0, 0.16);
+  --shadow: rgba(40, 40, 40, 0.18);
+}
+.dark {
+  --bg: #0a0a0d;
+  --bg-2: #121117;
+  --surface: #15141b;
+  --text: #ece9f0;
+  --muted: #8e8a98;
+  --accent: #ff3a5e;
+  --accent-2: #e11d48;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-2: rgba(255, 255, 255, 0.14);
+  --shadow: rgba(0, 0, 0, 0.55);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Familjen Grotesk', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.5s ease, color 0.5s ease;
+  overflow-x: hidden;
+}
+
+/* ---- Keyframes ---- */
+@keyframes rise { to { opacity: 1; transform: none; } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@keyframes spin360 { to { transform: rotate(360deg); } }
+
+/* Hero entrance (staggered) */
+.hero-rise { opacity: 0; transform: translateY(22px); animation: rise 0.9s forwards; }
+
+.dot-pulse { animation: pulse 2s infinite; }
+
+/* ---- Avatar with animated ring ---- */
+.avatar { width: 120px; height: 120px; position: relative; flex: none; }
+.avatar .ring {
+  position: absolute; inset: -5px; border-radius: 9999px;
+  background: conic-gradient(from 0deg, var(--accent), transparent 55%, var(--accent));
+  animation: spin360 4.5s linear infinite;
+}
+.avatar .inner {
+  position: absolute; inset: 0; border-radius: 9999px; overflow: hidden;
+  background: var(--bg-2); border: 4px solid var(--bg);
+  display: flex; align-items: center; justify-content: center;
+}
+.avatar .inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ---- Contact form focus ring (CSS-var aware) ---- */
+.field-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+/* Gradient text helper */
+.grad-text {
+  background: linear-gradient(100deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
+/* Hide default cursor */
+
+body {
+  cursor: none;
+}
+
+/* Main Cursor */
+
+.dev-cursor {
+  position: fixed;
+
+  width: 24px;
+  height: 24px;
+
+  border:
+    2px solid var(--accent);
+
+  border-radius: 9999px;
+
+  pointer-events: none;
+
+  z-index: 99999;
+
+  transform:
+    translate(-50%, -50%);
+
+  transition:
+    width 0.2s ease,
+    height 0.2s ease;
+
+  box-shadow:
+    0 0 18px
+    color-mix(
+      in srgb,
+      var(--accent) 45%,
+      transparent
+    );
+}
+
+/* Center Dot */
+
+.dev-cursor::after {
+  content: '';
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 9999px;
+
+  background: var(--accent);
+
+  transform:
+    translate(-50%, -50%);
+
+  box-shadow:
+    0 0 12px var(--accent);
+}
+
+/* Trail Container */
+
+.trail-container {
+  position: fixed;
+
+  pointer-events: none;
+
+  z-index: 9999;
+
+  animation:
+    trailFade 1.1s ease forwards;
+}
+
+/* API Packet Shape */
+
+.trail-dot {
+  width: 10px;
+  height: 10px;
+
+  border-radius: 3px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      transparent
+    );
+
+  transform:
+    rotate(45deg);
+
+  opacity: 0.9;
+
+  box-shadow:
+    0 0 10px
+    color-mix(
+      in srgb,
+      var(--accent) 55%,
+      transparent
+    );
+}
+
+/* Floating API Labels */
+
+.trail-label {
+  position: absolute;
+
+  top: 16px;
+  left: 16px;
+
+  padding:
+    6px 10px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 10px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--surface) 88%,
+      transparent
+    );
+
+  backdrop-filter:
+    blur(12px);
+
+  font-family:
+    'JetBrains Mono',
+    monospace;
+
+  font-size: 0.64rem;
+
+  color: var(--text);
+
+  white-space: nowrap;
+
+  opacity: 0.96;
+
+  box-shadow:
+    0 8px 30px -12px
+    var(--shadow);
+}
+
+/* Smooth Fade Animation */
+
+@keyframes trailFade {
+  from {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+  to {
+    opacity: 0;
+
+    transform:
+      translateY(-14px)
+      scale(0.45);
+  }
+}
