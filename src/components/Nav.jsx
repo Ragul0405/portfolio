@@ -49,8 +49,18 @@ export default function Nav({ theme, toggle, scrolled }) {
 
       <a
         href="#top"
-        className="flex-none font-display text-[1rem] font-extrabold tracking-tight sm:text-[1.1rem]"
+        className="group flex flex-none items-center gap-[10px] font-display text-[1rem] font-extrabold tracking-tight sm:text-[1.1rem]"
       >
+        <img
+          src={`${import.meta.env.BASE_URL}ragul.png`}
+          alt=""
+          width="32"
+          height="32"
+          /* hide rather than show a broken-image glyph if the file moves */
+          onError={(e) => { e.currentTarget.style.display = 'none' }}
+          className="h-7 w-7 flex-none rounded-full border border-accent/50 object-cover transition-transform duration-300 group-hover:scale-105 sm:h-8 sm:w-8"
+        />
+
         <span className="text-accent">
           Ragul Sankar
         </span>
