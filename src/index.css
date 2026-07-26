@@ -4,6 +4,9 @@
 
 /* ---- Theme variables (light = base, .dark overrides) ---- */
 :root {
+  /* max width of every content column — widened on large displays below */
+  --content-max: 1120px;
+
   --bg: #f4f2f4;
   --bg-2: #ece8ec;
   --surface: #ffffff;
@@ -30,6 +33,59 @@
 
 html {
   scroll-behavior: smooth;
+  /* keep long text off the edges on notched / rounded phones */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* ---- Responsive scale ----------------------------------------------------
+   Spacing and type are rem-based throughout, so moving the root size scales
+   the whole layout together instead of per-component overrides.            */
+
+/* very small phones: reclaim the gutter so text isn't squeezed */
+@media (max-width: 390px) {
+  body .max-w-content,
+  body .mx-auto.max-w-content {
+    padding-left: 1.15rem;
+    padding-right: 1.15rem;
+  }
+}
+
+/* large desktop */
+@media (min-width: 1600px) {
+  :root { --content-max: 1300px; }
+}
+
+/* 1080p TVs and ultrawides — viewed from further away, so scale up */
+@media (min-width: 1920px) {
+  :root { --content-max: 1480px; }
+  html { font-size: 17.5px; }
+}
+
+/* 1440p */
+@media (min-width: 2560px) {
+  :root { --content-max: 1840px; }
+  html { font-size: 20px; }
+}
+
+/* 4K */
+@media (min-width: 3400px) {
+  :root { --content-max: 2320px; }
+  html { font-size: 24px; }
+}
+
+/* ---- Input modality ----
+   TVs and set-top boxes navigate with a remote, so focus has to be obvious.
+   Touch devices get no hover-only affordances. */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (hover: none) {
+  /* stop sticky :hover states latching after a tap */
+  a:hover, button:hover { transition-duration: 0s; }
 }
 body {
   background: var(--bg);
@@ -80,171 +136,3 @@ body {
 }
 
 
-
-/* Hide default cursor */
-
-body {
-  cursor: none;
-}
-
-/* Main Cursor */
-
-.dev-cursor {
-  position: fixed;
-
-  width: 24px;
-  height: 24px;
-
-  border:
-    2px solid var(--accent);
-
-  border-radius: 9999px;
-
-  pointer-events: none;
-
-  z-index: 99999;
-
-  transform:
-    translate(-50%, -50%);
-
-  transition:
-    width 0.2s ease,
-    height 0.2s ease;
-
-  box-shadow:
-    0 0 18px
-    color-mix(
-      in srgb,
-      var(--accent) 45%,
-      transparent
-    );
-}
-
-/* Center Dot */
-
-.dev-cursor::after {
-  content: '';
-
-  position: absolute;
-
-  top: 50%;
-  left: 50%;
-
-  width: 6px;
-  height: 6px;
-
-  border-radius: 9999px;
-
-  background: var(--accent);
-
-  transform:
-    translate(-50%, -50%);
-
-  box-shadow:
-    0 0 12px var(--accent);
-}
-
-/* Trail Container */
-
-.trail-container {
-  position: fixed;
-
-  pointer-events: none;
-
-  z-index: 9999;
-
-  animation:
-    trailFade 1.1s ease forwards;
-}
-
-/* API Packet Shape */
-
-.trail-dot {
-  width: 10px;
-  height: 10px;
-
-  border-radius: 3px;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--accent),
-      transparent
-    );
-
-  transform:
-    rotate(45deg);
-
-  opacity: 0.9;
-
-  box-shadow:
-    0 0 10px
-    color-mix(
-      in srgb,
-      var(--accent) 55%,
-      transparent
-    );
-}
-
-/* Floating API Labels */
-
-.trail-label {
-  position: absolute;
-
-  top: 16px;
-  left: 16px;
-
-  padding:
-    6px 10px;
-
-  border:
-    1px solid var(--line);
-
-  border-radius: 10px;
-
-  background:
-    color-mix(
-      in srgb,
-      var(--surface) 88%,
-      transparent
-    );
-
-  backdrop-filter:
-    blur(12px);
-
-  font-family:
-    'JetBrains Mono',
-    monospace;
-
-  font-size: 0.64rem;
-
-  color: var(--text);
-
-  white-space: nowrap;
-
-  opacity: 0.96;
-
-  box-shadow:
-    0 8px 30px -12px
-    var(--shadow);
-}
-
-/* Smooth Fade Animation */
-
-@keyframes trailFade {
-  from {
-    opacity: 1;
-
-    transform:
-      translateY(0)
-      scale(1);
-  }
-
-  to {
-    opacity: 0;
-
-    transform:
-      translateY(-14px)
-      scale(0.45);
-  }
-}

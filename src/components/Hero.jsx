@@ -50,6 +50,16 @@ import ThreeShape from './ThreeShape.jsx'
 export default function Hero({ theme }) {
   return (
     <header id="top" className="relative flex min-h-screen items-center overflow-hidden">
+      {/* Scrim: keeps the copy crisp where the site-wide rain passes behind it */}
+
+      <div
+        className="pointer-events-none absolute inset-0 z-[1]"
+        style={{
+          background:
+            'radial-gradient(58% 64% at 26% 52%, var(--bg) 0%, color-mix(in srgb, var(--bg) 60%, transparent) 44%, transparent 74%)',
+        }}
+      />
+
       <ThreeShape theme={theme} />
 
       {/* glow */}
@@ -87,7 +97,9 @@ export default function Hero({ theme }) {
         </h1>
 
         <p
-          className="hero-rise mb-[38px] max-w-[620px] text-[1.18rem] leading-[1.8] text-muted"
+          /* rem, not px, so the measure grows with the root scale on TVs
+             instead of staying a narrow column beside a huge headline */
+          className="hero-rise mb-[38px] max-w-[39rem] text-[1.18rem] leading-[1.8] text-muted"
           style={{ animationDelay: '.5s' }}
         >
           Backend Developer with 1.3 years of experience building REST APIs,

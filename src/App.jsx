@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
 import useTheme from './hooks/useTheme.js'
+import useHashRoute from './hooks/useHashRoute.js'
+import PlayPage from './components/play/PlayPage.jsx'
+import CompilerPage from './components/play/CompilerPage.jsx'
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
@@ -8,12 +11,14 @@ import Skills from './components/Skills.jsx'
 import Work from './components/Work.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
+import CodeRain from './components/CodeRain.jsx'
 import CursorRabbit from './components/CursorRabbit'
 
 
 export default function App() {
   const [theme, toggle] = useTheme()
   const [scrolled, setScrolled] = useState(false)
+  const route = useHashRoute()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -21,9 +26,21 @@ export default function App() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  if (route === '/play' || route === '/compiler') {
+    const Page = route === '/play' ? PlayPage : CompilerPage
+    return (
+      <>
+        <CodeRain theme={theme} />
+        <Page theme={theme} toggle={toggle} />
+      </>
+    )
+  }
+
   return (
     <>
-      <CursorRabbit />
+      {/* <CursorRabbit /> */}
+      <CodeRain theme={theme} />
+
       <Nav theme={theme} toggle={toggle} scrolled={scrolled} />
       <Hero theme={theme} />
       <About />

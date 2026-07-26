@@ -1,101 +1,3 @@
-// import { useState } from 'react'
-
-// const FORMSPREE_ACTION = 'https://formspree.io/f/YOUR_FORM_ID'
-// const EMAIL = 'you@email.com'
-
-// const labelCls =
-//   'pointer-events-none absolute left-4 top-2 font-mono text-[0.68rem] uppercase tracking-wider text-accent transition-all ' +
-//   'peer-placeholder-shown:top-4 peer-placeholder-shown:font-body peer-placeholder-shown:text-base peer-placeholder-shown:normal-case peer-placeholder-shown:tracking-normal peer-placeholder-shown:text-muted ' +
-//   'peer-focus:top-2 peer-focus:font-mono peer-focus:text-[0.68rem] peer-focus:uppercase peer-focus:tracking-wider peer-focus:text-accent'
-
-// const inputCls =
-//   'field-input peer w-full rounded-[11px] border border-line bg-surface px-4 pb-2 pt-5 text-[1rem] text-text transition-colors'
-
-// export default function Contact() {
-//   const [form, setForm] = useState({ name: '', email: '', message: '' })
-//   const [note, setNote] = useState({ text: '', type: '' })
-
-//   const update = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault()
-//     const { name, email, message } = form
-//     if (!name.trim() || !email.trim() || !message.trim()) {
-//       setNote({ text: 'Please fill in every field.', type: 'err' })
-//       return
-//     }
-//     if (FORMSPREE_ACTION.includes('YOUR_FORM_ID')) {
-//       setNote({ text: 'Opening your email app…', type: '' })
-//       window.location.href =
-//         `mailto:${EMAIL}?subject=` +
-//         encodeURIComponent('Portfolio contact — ' + name) +
-//         '&body=' +
-//         encodeURIComponent(message + '\n\nFrom: ' + name + ' (' + email + ')')
-//       return
-//     }
-//     setNote({ text: 'Sending…', type: '' })
-//     try {
-//       const res = await fetch(FORMSPREE_ACTION, {
-//         method: 'POST',
-//         body: new FormData(e.target),
-//         headers: { Accept: 'application/json' },
-//       })
-//       if (res.ok) {
-//         setForm({ name: '', email: '', message: '' })
-//         setNote({ text: '✓ Thanks — your message has been sent.', type: 'ok' })
-//       } else {
-//         setNote({ text: `Hmm, that failed. Email me at ${EMAIL}`, type: 'err' })
-//       }
-//     } catch {
-//       setNote({ text: `Network error. Email me at ${EMAIL}`, type: 'err' })
-//     }
-//   }
-
-//   return (
-//     <section id="contact" className="relative z-[2] py-[130px_0_90px] pb-[90px] pt-[130px] text-center">
-//       <div className="mx-auto max-w-content px-8">
-//         <span className="font-mono text-[0.74rem] uppercase tracking-[0.14em] text-accent">Let's build something</span>
-//         <h2 className="mx-auto my-[16px] mb-3 font-display text-[clamp(2.2rem,6.5vw,4.4rem)] font-extrabold leading-[1.03] tracking-[-0.03em]">
-//           Need a backend that<br />
-//           <em className="grad-text not-italic">just works?</em>
-//         </h2>
-//         <p className="mx-auto mb-[44px] max-w-[460px] text-muted">
-//           Drop me a message about a role, a project, or just to say hello. I usually reply within a day.
-//         </p>
-
-//         <form onSubmit={handleSubmit} noValidate className="mx-auto grid max-w-[560px] gap-[18px] text-left">
-//           <div className="relative">
-//             <input id="f-name" name="name" value={form.name} onChange={update('name')} placeholder=" " className={inputCls} />
-//             <label htmlFor="f-name" className={labelCls}>Your name</label>
-//           </div>
-//           <div className="relative">
-//             <input id="f-email" name="email" type="email" value={form.email} onChange={update('email')} placeholder=" " className={inputCls} />
-//             <label htmlFor="f-email" className={labelCls}>Email address</label>
-//           </div>
-//           <div className="relative">
-//             <textarea id="f-msg" name="message" value={form.message} onChange={update('message')} placeholder=" " className={`${inputCls} min-h-[120px] resize-y`} />
-//             <label htmlFor="f-msg" className={labelCls}>Message</label>
-//           </div>
-//           <button type="submit" className="w-full rounded-[10px] bg-accent px-[26px] py-4 text-[0.92rem] font-semibold text-white transition-transform duration-300 hover:-translate-y-[3px] hover:shadow-[0_12px_30px_-10px_var(--accent)]">
-//             Send message
-//           </button>
-//           <p className={`min-h-[22px] text-center font-mono text-[0.92rem] ${note.type === 'ok' ? 'text-accent' : note.type === 'err' ? 'text-accent-2' : 'text-muted'}`}>
-//             {note.text}
-//           </p>
-//         </form>
-
-//         <div className="mt-[34px] flex flex-wrap justify-center gap-[22px]">
-//           {[[EMAIL, `mailto:${EMAIL}`], ['LinkedIn', '#'], ['GitHub', '#'], ['Resume', '#']].map(([t, h]) => (
-//             <a key={t} href={h} className="border-b-[1.5px] border-transparent text-[0.92rem] font-semibold transition-colors hover:border-accent hover:text-accent">
-//               {t}
-//             </a>
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   )
-// }
-
 import { useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
 
@@ -116,7 +18,7 @@ const GITHUB = 'https://github.com/ragul0405'
 
 const INSTAGRAM = 'https://www.instagram.com/___ragul___s?igsh=azMxdjRpNGQ4NHlh&utm_source=qr'
 
-const RESUME = '/Ragul_Resume.pdf'
+const RESUME = `${import.meta.env.BASE_URL}Ragul_Resume.pdf`
 
 const SERVICE_ID = 'service_lr0mlsm'
 const TEMPLATE_ID = 'template_x4nyy7b'

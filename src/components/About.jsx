@@ -1,5 +1,6 @@
 import Reveal from './Reveal.jsx'
 import SectionHead from './SectionHead.jsx'
+import TypingTerminal from './TypingTerminal.jsx'
 
 export default function About() {
   return (
@@ -16,7 +17,7 @@ export default function About() {
                 <div className="inner">
                   {/* Replace src with your photo */}
                   <img
-                    src="/ragul.png"
+                    src={`${import.meta.env.BASE_URL}ragul.png`}
                     alt="Ragul Sankar"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none'
@@ -67,51 +68,7 @@ export default function About() {
           </Reveal>
 
           <Reveal className="overflow-hidden rounded-[14px] border border-line bg-bg-2 font-mono text-[0.84rem] shadow-[0_20px_50px_-28px_var(--shadow)]">
-            <div className="flex gap-[7px] border-b border-line px-4 py-[13px]">
-              <i className="h-[11px] w-[11px] rounded-full bg-accent" />
-              <i className="h-[11px] w-[11px] rounded-full bg-line-2" />
-              <i className="h-[11px] w-[11px] rounded-full bg-line-2" />
-            </div>
-
-            <div className="px-[18px] pb-[22px] pt-[18px] leading-[2] text-muted">
-              <div>
-                <span className="text-accent">$</span>{' '}
-                <span className="text-text">whoami</span>
-              </div>
-
-              <div>backend_developer</div>
-
-              <div>
-                <span className="text-accent">$</span>{' '}
-                <span className="text-text">cat stack.json</span>
-              </div>
-
-              <div>{'{'}</div>
-
-              <div>
-                &nbsp;&nbsp;"backend": ["Python", "Django", "DRF"],
-              </div>
-
-              <div>
-                &nbsp;&nbsp;"database": ["PostgreSQL", "MySQL"],
-              </div>
-
-              <div>
-                &nbsp;&nbsp;"tools": ["Git", "Postman", "PyInstaller"]
-              </div>
-
-              <div>{'}'}</div>
-
-              <div>
-                <span className="text-accent">$</span>{' '}
-                <span className="text-text">status</span>
-              </div>
-
-              <div>
-                actively_building_and_learning
-                <span className="text-accent">▋</span>
-              </div>
-            </div>
+            <TypingTerminal />
           </Reveal>
         </div>
       </div>

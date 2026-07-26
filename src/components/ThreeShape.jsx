@@ -9,31 +9,34 @@ const logs = [
   'Deployment successful',
 ]
 
+const WINDOW = 5
+
 export default function ThreeShape() {
-  const [visibleLogs, setVisibleLogs] = useState([])
+  /* A single monotonic counter is the only state. The visible window is
+     derived from it, so the list can't duplicate or skip an entry — the old
+     version mutated a closure `index` from inside the interval callback,
+     which desynced from the appended values. */
+  const [count, setCount] = useState(1)
 
   useEffect(() => {
-    let index = 0
-
     const interval = setInterval(() => {
-      setVisibleLogs((prev) => {
-        const next = [...prev, logs[index]]
-
-        if (next.length > 5) {
-          next.shift()
-        }
-
-        return next
-      })
-
-      index = (index + 1) % logs.length
+      setCount((c) => c + 1)
     }, 1500)
 
     return () => clearInterval(interval)
   }, [])
 
+  const start = Math.max(0, count - WINDOW)
+
+  const visibleLogs = Array.from(
+    { length: count - start },
+    (_, i) => ({ seq: start + i, text: logs[(start + i) % logs.length] })
+  )
+
   return (
-    <div className="pointer-events-none absolute inset-0 z-[1] hidden overflow-hidden lg:block">
+    // xl, not lg: between 1024 and 1280 the card sat on top of the hero
+    // paragraph, which is capped at 620px and starts at the container edge
+    <div className="pointer-events-none absolute inset-0 z-[1] hidden overflow-hidden xl:block">
 
       {/* Glow */}
 
@@ -47,7 +50,7 @@ export default function ThreeShape() {
 
       {/* Dashboard */}
 
-      <div className="absolute right-[5%] top-1/2 w-[400px] -translate-y-1/2 space-y-4">
+      <div className="absolute right-[5%] top-1/2 w-[25rem] -translate-y-1/2 space-y-4">
 
         {/* Status Card */}
 
@@ -116,9 +119,9 @@ export default function ThreeShape() {
 
           <div className="space-y-2 font-mono text-[0.74rem]">
 
-            {visibleLogs.map((log, i) => (
+            {visibleLogs.map((log) => (
               <div
-                key={i}
+                key={log.seq}
                 className="flex items-center gap-2 text-text animate-[fadeIn_0.4s_ease]"
               >
                 <span className="text-accent">
@@ -126,7 +129,7 @@ export default function ThreeShape() {
                 </span>
 
                 <span>
-                  {log}
+                  {log.text}
                 </span>
               </div>
             ))}

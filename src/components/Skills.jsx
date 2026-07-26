@@ -46,6 +46,7 @@ import SectionHead from './SectionHead.jsx'
 import {
   SiPython,
   SiDjango,
+  SiReact,
   SiPostgresql,
   SiMysql,
   SiGit,
@@ -74,6 +75,11 @@ const skills = [
   {
     name: 'REST APIs',
     icon: <FaServer size={26} />,
+  },
+
+  {
+    name: 'React JS',
+    icon: <SiReact size={26} />,
   },
 
   {

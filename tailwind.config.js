@@ -4,6 +4,12 @@ export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
+      screens: {
+        xs: '400px',
+        // living-room territory — TVs and ultrawides
+        '3xl': '1920px',
+        '4xl': '2560px',
+      },
       colors: {
         bg: 'var(--bg)',
         'bg-2': 'var(--bg-2)',
@@ -20,7 +26,9 @@ export default {
         body: ['"Familjen Grotesk"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
-      maxWidth: { content: '1120px' },
+      // driven by a custom property so every existing max-w-content usage
+      // widens on large displays with no per-component changes
+      maxWidth: { content: 'var(--content-max)' },
     },
   },
   plugins: [],

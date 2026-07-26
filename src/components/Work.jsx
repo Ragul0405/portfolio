@@ -72,27 +72,27 @@ const projects = [
   {
     num: 'PROJECT/01',
 
-    title: 'FOCULT — Employee Monitoring',
+    title: 'Empora — Employee Monitoring',
 
     desc:
-      'Built backend APIs for an employee monitoring system with activity tracking, authentication, report generation, and desktop monitoring functionalities using Django REST Framework and PyInstaller.',
+      'Full stack employee monitoring platform with activity tracking, authentication, report generation, and a packaged desktop monitoring agent. Built the REST APIs with Django REST Framework, the dashboard in React, and shipped the desktop client via PyInstaller.',
 
-    tags: ['Python', 'Django', 'DRF', 'PyInstaller'],
+    tags: ['Python', 'Django', 'REST APIs', 'React JS', 'PyInstaller'],
 
-    link: 'https://focultapp.jpworld.org.in/',
+    link: 'https://empora-app.vkfotos.site/',
   },
 
   {
     num: 'PROJECT/02',
 
-    title: 'NextLife — Real Estate Platform',
+    title: 'Neem — Dress Shop E-Commerce',
 
     desc:
-      'Developed backend services for a real estate property buying and selling platform including property listings, customer management, inquiry handling, and role-based authentication.',
+      'Full stack e-commerce store for a dress shop, delivered for a client. Built the product catalog, cart and checkout flow, order management, and role-based authentication as Django REST APIs, with a React storefront and an admin dashboard for inventory and orders.',
 
-    tags: ['Django', 'REST APIs', 'PostgreSQL', 'MySQL'],
+    tags: ['Python', 'Django', 'REST APIs', 'React JS'],
 
-    link: 'https://nlssfe.etplhub.com/',
+    link: 'https://vkfotos.site/',
   },
 ]
 
