@@ -94,6 +94,19 @@ const projects = [
 
     link: 'https://vkfotos.site/',
   },
+
+  {
+    num: 'PROJECT/03',
+
+    title: 'Jun Technology — Company Website',
+
+    desc:
+      'Static marketing site delivered for Jun Technology, a software company in Chennai. Built the full single page experience — hero, about, services, portfolio, testimonials and contact — with scroll reveals, a theme toggle and animated stat counters, plus a Django backed contact form that stores enquiries. Deployed behind Nginx on an AWS EC2 instance.',
+
+    tags: ['HTML', 'CSS', 'JavaScript', 'Django', 'Nginx', 'AWS EC2'],
+
+    link: 'http://54.83.119.140/',
+  },
 ]
 
 function TiltCard({ p }) {
